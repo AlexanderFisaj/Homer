@@ -32,32 +32,21 @@ void PrintDualArray(int[,] array) // Метод вывод 2-мерного ма
 }
 
 
-void DownSortRowsArray (int[,] array, int numberCall) // Метод сортировки
-{    
-    for (int i = 0; i < array.GetLength(1); i++)
-    {
-        
-        for (int j = 1; j < array.GetLength(1); j++)
-        {
-            if (array[numberCall, i] < array[numberCall, j])
-            {
-                int tmp = array[numberCall, i];
-                array[numberCall, i] = array[numberCall, j];
-                array[numberCall, j] = tmp;
-                break;
-            }
-        }        
-    }    
-}
-
-void Maxim (int[,] array, int positionA, int positionB)
+void DownSortRowsArray(int[,] array) // Метод сортировки строк массива по убыванию
 {
-    int maximum = array[positionA, positionB]
-    for (i = 0; i < array.GetLength(1); i++)
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-            if(array[i, positionB] > maximum)
+        for (int j = 0; j < array.GetLength(1); j++)
         {
-            maximum = Maxim(array, positionA, i + 1);            
+            for (int k = 0; k < array.GetLength(1) - 1; k++)
+            {
+                if (array[i, k] < array[i, k + 1])
+                {
+                    int temp = array[i, k + 1];
+                    array[i, k + 1] = array[i, k];
+                    array[i, k] = temp;
+                }
+            }
         }
     }
 }
@@ -73,10 +62,8 @@ Console.WriteLine("Задан массив:");
 PrintDualArray(dualArray); // Вывод 2-мерного массива в консоль
 Console.WriteLine();
 
-for (int k = 0; k < dualArray.GetLength(0); k++)
-{
-    DownSortRowsArray(array: dualArray, numberCall: k);
-}
+DownSortRowsArray(dualArray); // Массив передан методу на сортировку
+
 Console.WriteLine();
 Console.WriteLine("Отсортированный массив: ");
 PrintDualArray(dualArray); // Вывод массива результатов сортировки
